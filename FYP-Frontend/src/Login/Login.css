@@ -1,0 +1,83 @@
+.login {
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  height: 100vh;
+  
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  background: #a6b3e6;
+ 
+  }
+  
+  .input {
+    height: 25px;
+    width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    background-color:lightgray;
+    border: solid darkgray;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;  }
+
+  .button {
+   
+    margin-top: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: skyblue;
+    border: 1px solid darkblue;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 100px;
+    display: flex;
+    width:130px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .button:hover {
+    background: lightblue;
+  }
+  
+  
+  
+  .login-form {
+    background-color: white;
+    padding: 2rem;
+    max-width: max-content;
+    margin:auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  img{
+    height:350px;
+  }
+  
+  .list-container {
+    display: flex;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+   
+  }
+  
+  
