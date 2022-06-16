@@ -29,7 +29,7 @@ const TeacherCourses = () => {
 
   const Course = (course) => {
   
-    console.log("hellllllllll"+course.c_name)
+    // console.log("hellllllllll"+course.c_name)
     return (
         <div className="col ">
         <div class="card border-primary " style={{
@@ -39,7 +39,7 @@ const TeacherCourses = () => {
          }} >
             {/* {console.log("course name in course is"+course.c_name)} */}
 
-        <img src="https://picsum.photos/id/0/5616/3744" class="card-img-top" alt="..." style={{height: 200}}/>
+        <img src={course.course_id.img} class="card-img-top" alt="..." style={{height: 200}}/>
         <div class="card-body" >
             <h5 class="card-title">{course.course_id.c_name}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{course.course_id.c_code}</h6>
