@@ -35,7 +35,7 @@ mongoose.connect('mongodb+srv://raiarslanriasat:Arslan%40123@cluster0.edbuh.mong
 // })
 
 // use it before all route definitions
-app.use(cors({origin: 'http://localhost:3000'}));
+app.use(cors({origin: ['http://localhost:3000','http://192.168.18.65']}));
 
 //connect to DB
 // mongoose.connect('mongodb+srv://raiarslanriasat:Arslan%40123@cluster0.edbuh.mongodb.net/?retryWrites=true&w=majority',
