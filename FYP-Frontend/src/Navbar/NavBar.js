@@ -18,7 +18,7 @@ const TopMenu = () => {
   const classes = usestyles();
   return (
     <div>
-      <AppBar position="static" color="default" style={{ height: "55px" }}>
+      <AppBar position="fixed" color="default" style={{ height: "55px" }}>
         <Toolbar>
           
 

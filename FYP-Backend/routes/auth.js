@@ -60,7 +60,7 @@ router.post("/login", async (req, res) => {
   }
   // console.log("type is"+type);
 
-  res.status(200).send({token:token, name:user.name,email:user.email,type:type,user_id:user._id});
+  res.status(200).send({token:token, name:user.name,type:type,user_id:user._id});
 
 
 });

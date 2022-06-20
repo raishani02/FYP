@@ -8,7 +8,7 @@ function StudentHome() {
       <div
         style={{
           float: "right",
-          height: "100vh",
+          height: "100%",
           width: "75%",
           backgroundColor: "lightgray",
         }}

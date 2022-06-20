@@ -45,7 +45,7 @@ const StudentCourses = () => {
                 marginRight: "-32px",
                 
              }} >
-            <img src={course.cts_id.course_id.img} class="card-img-top" alt="..." style={{height: 200}}/>
+            <img src="https://picsum.photos/id/0/5616/3744" class="card-img-top" alt="..." style={{height: 200}}/>
             <div class="card-body" >
                 <h5 class="card-title">{course.cts_id.course_id.c_name}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{course.cts_id.course_id.c_code}</h6>
