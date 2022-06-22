@@ -1,4 +1,3 @@
-import { Container } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -6,10 +5,15 @@ import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import {Row, Col, Button, Breadcrumb, Menu, Modal, Input} from 'antd';
+import { Button} from 'antd';
 import TableRow from "@mui/material/TableRow";
 import React from "react";
 import TeacherMenu from "./TeacherMenu";
+import { useState } from "react";
+import { Fragment } from "react";
+import EditableBreakdownTable from "./EditableBreakdownTable";
+import ReadOnlyBreakdownTable from "./ReadOnlyBreakdownTable";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -27,29 +31,90 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData(1, "Intro to databases", "DB approach, DBMS Approach", "CH: 1,2","P1"),
-  createData(1, "Relational dataModel", "RA, SQL","CH: 3","-"),
-  createData(2, "Formal Query Language","Retrieval Queries","CH: 3,4","P2"),
-  createData(2, "Normalization", "1NF, 2NF, 3NF","CH: 4,5","-"),
-  createData(3, "ER Modeling", "ER,EER", "CH: 6","P3"),
-];
+const data = [
+  {id: 1, Week: 1, Topics_To_Be_Covered:"Intro to databases" , Topic_Details:"DB approach", Reading_From_TextBook:"CH: 1,2",Project_Deliverable:"P1" },
+  {id: 2, Week: 1, Topics_To_Be_Covered:"Relational dataModel" , Topic_Details:"RA, SQL", Reading_From_TextBook:"CH: 3,4",Project_Deliverable:"-" },
+  {id: 3, Week: 2, Topics_To_Be_Covered:"Formal Query Language" , Topic_Details:"Retrieval Queries", Reading_From_TextBook:"CH: 4,5",Project_Deliverable:"P2" },
+  {id: 4, Week: 2, Topics_To_Be_Covered:"Normalization" , Topic_Details:"1NF, 2NF, 3NF", Reading_From_TextBook:"CH: 5",Project_Deliverable:"P3" },
+  {id: 5, Week: 3, Topics_To_Be_Covered:"ER Modeling" , Topic_Details:"ER,EER", Reading_From_TextBook:"CH: 6",Project_Deliverable:"P4" },
+]
 
 function TeacherWeeklyBreakdown() {
+
+  const [rows,setRows] = useState(data);
+  const [editRowId,setEditRowId] = useState(null);
+  const [editFormData, setEditFormData] = useState({
+    Week: "",
+     Topics_To_Be_Covered: "",
+     Topic_Details: "",
+     Reading_From_TextBook: "", 
+     Project_Deliverable: "",
+  }) 
+
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+    const fieldName = event.target.getAttribute("Week");     
+    const fieldValue = event.target.value;          
+
+    const newFormData = {...editFormData };
+    newFormData[fieldName] = fieldValue;          // set value against respective field
+
+    setEditFormData(newFormData);         // set updated value
+  }
+
+
+  const handleEditClick = (event, row) => {
+    event.preventDefault();
+    setEditRowId(row.id);
+
+    const formValues = {   // storing values
+      Week: row.Week,
+     Topics_To_Be_Covered: row.Topics_To_Be_Covered,
+     Topic_Details: row.Topic_Details,
+     Reading_From_TextBook: row.Reading_From_TextBook, 
+     Project_Deliverable: row.Project_Deliverable,
+    }
+
+    setEditFormData(formValues);
+  }
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+
+    const editedRow = {   // save values
+      id: editRowId,
+      Week: editFormData.Week,
+      Topics_To_Be_Covered: editFormData.Topics_To_Be_Covered,
+      Topic_Details: editFormData.Topic_Details,
+      Reading_From_TextBook: editFormData.Reading_From_TextBook, 
+      Project_Deliverable: editFormData.Project_Deliverable,
+    }
+
+    const newRow = [...rows];
+
+    //find index of updating row
+    const index= rows.findIndex((row) => row.id === editRowId)
+
+    // pass index to store edited row
+    newRow[index] = editedRow
+
+     // now hide editable row, as we are donw with editing
+     setRows(newRow);
+     setEditRowId(null);
+  }
+
+  const handleDeleteClick = (rowId) => {
+    const newRows = [...rows];
+
+    const index = rows.findIndex((row) => row.id === rowId);
+
+    newRows.splice(index, 1);  // delete only 1 row of repective index 
+
+    setRows(newRows);
+  };
+
   return (
     <div>
       <TeacherMenu />
@@ -62,6 +127,7 @@ function TeacherWeeklyBreakdown() {
         }}
       >
         <div style={{ marginTop: "150px",marginLeft: "30px",marginRight: "30px" }}>
+        <form onSubmit={handleEditFormSubmit}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
@@ -87,23 +153,24 @@ function TeacherWeeklyBreakdown() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.calories}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  </StyledTableRow>
-                ))}
+              {rows.map((row) => (
+                  <Fragment>
+                  { editRowId === row.id ? 
+                    <EditableBreakdownTable 
+                    editFormData = {editFormData}   // pass editformdata
+                    handleEditFormChange = {handleEditFormChange}     // pass function to update form values in set state 
+                    />   
+                  :
+                  <ReadOnlyBreakdownTable 
+                  row = {row}
+                  handleEditClick = {handleEditClick}
+                  handleDeleteClick = {handleDeleteClick}
+                   />
+                  }</Fragment> ) )}             
               </TableBody>
             </Table>
           </TableContainer>
-          <Button type='default' style={{marginTop: 12, marginLeft:400}}>Update</Button>
+          </form>
         </div>
       </div>
     </div>

@@ -1,80 +1,32 @@
 import React from "react";
-import TeacherMenu from "./TeacherMenu";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useState } from 'react';
-import { Button } from "react-bootstrap";
+import StudentMenu from "./StudentMenu";
+import { Row,Col } from "react-bootstrap";
 
 
-const UploadAssessments = () => {
+const StudentViewAssignmentDetail = () => {
 
     const data = [
-        { Assignment_No: "1", weightage: "2%", Difficulty_Level: "Medium",Total_Submissions_Recieved:"34", Posted_On:"2-April-2022", Deadline:	"3-April-2022" },
+        { Assignment_No: "1", weightage: "2%", Difficulty_Level: "Medium", Posted_On:"2-April-2022", Deadline:	"3-April-2022" },
       ]
-
-      const [assignmentNumber, setAssignmentNo] = useState('');
 
     return (
       <div>
         
-        <TeacherMenu />
-        <div className="container">
-        <h1 style={{ marginTop: "50px", textAlign: "center" }}>ASSESMENTS</h1>
+        <StudentMenu />       
 
-          <div
-            class="card border-primary "
-            style={{
-              marginLeft: "500px",
-              width: "400px",
-              height: "250px",
-              textAlign: "center",
-              marginTop: "60px",
-            }}
-          >
-            <div class="card-body">
-              <h5 class="card-title"> <strong> Assignment No: </strong> </h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <form>
-                  <div class="form-group">
-                    <label for="assignment">Enter Assignment number</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="assignment"
-                      aria-describedby="emailHelp"
-                      placeholder="Assignment No."
-                      onChange={event => setAssignmentNo(event.target.value)}
-                      value={assignmentNumber}
-                    />
-                    <small id="AssignmentHelp" class="form-text text-muted">
-                      Write Assignment no. you want to view data of; e.g 1,2,3,...
-                    </small>
-                  </div>
-                </form>
-              </li>
-            </ul>
-            <div class="card-body">
-              <a
-                href="/teacher-course-details?course_name=OOP"
-                class="btn btn-primary"
-              >
-                VIEW 
-              </a>
-              <Button>View </Button>
-            </div>
-          </div>
-        </div>
+        <div className="container" >
+            <Row>
+                <Col>
+                <h1 style={{ marginTop: "100px", textAlign:"center"}} >Assignment Details</h1>
 
-        <div className="container">
-          <table
+                <table
             style={{
               border: "2px solid skyblue",
               width: "800px",
               height: "200px",
-              marginTop: "40px",
               marginLeft: "380px",
+               marginTop: "100px",
+
             }}
           >
             <tr>
@@ -105,15 +57,7 @@ const UploadAssessments = () => {
               >
                 <strong>Difficulty Level</strong>
               </th>
-              <th
-                style={{
-                  borderBottom: " 1px solid skyblue",
-                  borderRight: "1px solid skyblue",
-                  textAlign: "center",
-                }}
-              >
-                <strong>Total Submissions Recieved</strong>
-              </th>
+              
               <th
                 style={{
                   borderBottom: " 1px solid skyblue",
@@ -160,14 +104,7 @@ const UploadAssessments = () => {
                   >
                     {val.Difficulty_Level}
                   </td>
-                  <td
-                    style={{
-                      textAlign: "center",
-                      borderRight: "1px solid skyblue",
-                    }}
-                  >
-                    {val.Total_Submissions_Recieved}
-                  </td>
+                 
                   <td
                     style={{
                       textAlign: "center",
@@ -188,10 +125,12 @@ const UploadAssessments = () => {
               );
             })}
           </table>
+                </Col>
+            </Row>
+         
         </div>
-        {/* <a href="/teacher-course-details?course_name=OOP" class="btn btn-primary"> VIEW </a> */}
       </div>
     );
 }; 
     
-export default UploadAssessments;
+export default StudentViewAssignmentDetail;
