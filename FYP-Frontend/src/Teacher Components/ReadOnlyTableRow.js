@@ -52,6 +52,7 @@ const ReadOnlyTableRow = ({row, handleEditClick}) => {
                       <Button onClick={(event) => handleEditClick (event,row)} style={{color:"blue"}}> <strong>Edit</strong> </Button>
                     </StyledTableCell>
                   </StyledTableRow>
+
     )
 } 
 
