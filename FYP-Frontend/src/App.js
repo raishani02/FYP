@@ -7,7 +7,6 @@ import TeacherCourses from "./Teacher Components/TeacherCourses";
 import TeacherLeaderBoard from "./Teacher Components/TeacherLeaderBoard";
 import TeacherStudentProgress from "./Teacher Components/TeacherStudentProgress";
 import TeacherWeeklyBreakdown from "./Teacher Components/TeacherWeeklyBreakdown";
-// import Home from "./Teacher Components/Home";
 import StudentCourses from "./Student Components/StudentCourses";
 import StudentHome from "./Student Components/StudentHome";
 import StudentLeaderBoard from "./Student Components/StudentLeaderBoard";
@@ -15,13 +14,13 @@ import StudentProgress from "./Student Components/StudentProgress";
 import StudentWeeklyBreakdown from "./Student Components/StudentWeeklyBreakdown";
 import CourseDetails from "./Teacher Components/CourseDetails";
 import StudentCourseDetails from "./Student Components/StudentCourseDetails";
-import firebase from "./Firebase/firebase";
 import RecommendedMaterial from "./Student Components/RecommendedMaterial";
-import { Assessment } from "@mui/icons-material";
 import Assessments from "./Teacher Components/Assessments";
-import UploadAssessments from "./Teacher Components/UploadAssessments"
 import StudentAssessments from "./Student Components/StudentAssessments";
-import StuUploadAssessments from "./Student Components/StuUploadAssessments";
+import ViewAssignmentDetail from "./Teacher Components/ViewAssignmentDetail";
+import ViewQuizDetail from "./Teacher Components/ViewQuizDetail.js";
+import StudentViewAssignmentDetail from "./Student Components/StudentViewAssignmentDetail";
+import StudentViewQuizDetail from "./Student Components/StudentViewQuizDetail";
 
 function App() {
   return (
@@ -72,12 +71,20 @@ function App() {
               element={<StudentAssessments />}
             />
             <Route
-              path="/teacher-upload-assessments"
-              element={<UploadAssessments />}
+              path="/teacher-view-assignments-detail"
+              element={<ViewAssignmentDetail />}
             />
              <Route
-              path="/student-upload-assessments"
-              element={<StuUploadAssessments />}
+              path="/teacher-view-quiz-detail"
+              element={<ViewQuizDetail />}
+            />
+              <Route
+              path="/student-view-assignments-detail"
+              element={<StudentViewAssignmentDetail />}
+            />
+             <Route
+              path="/student-view-quiz-detail"
+              element={<StudentViewQuizDetail />}
             />
           </Routes>
         </div>

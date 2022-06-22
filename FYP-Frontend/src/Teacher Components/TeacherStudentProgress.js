@@ -5,10 +5,12 @@ import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import {Row, Col, Button, Breadcrumb, Menu, Modal, Input} from 'antd';
+import { Button} from 'antd';
 import TableRow from "@mui/material/TableRow";
-import React from "react";
+import React, { Fragment, useState } from "react";
 import TeacherMenu from "./TeacherMenu";
+import ReadOnlyTableRow from "./ReadOnlyTableRow";
+import EditableTableRow from "./EditableTableRow";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -26,51 +28,99 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+const data = [
+  {id:1,name: "Ali",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:2,name: "Bilal",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:3,name: "Rimsha",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:4,name: "Arsalan",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:5,name: "Alia",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:6,name: "Alian",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:7,name: "Ahmad",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:8,name: "Furqan",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:9,name: "Alisha",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:10,name: "Aliya",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:11,name: "Alina",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:12,name: "Ali",assessment_1: 19,assessment_2: 6.0,assessment_3: 24},
+  {id:13,name: "Aslam",assessment_1: 19,assessment_2: 6.0,assessment_3: 24}
 
-const rows = [
-  createData("Ali", 19, 6.0, 24),
-  createData("Bilal", 17, 9.0, 37),
-  createData("Rimsha", 16, 16.0, 24),
-  createData("Arsalan", 15, 3.7, 67),
-  createData("Alina", 19, 16.0, 49),
-  createData("Ali", 19, 6.0, 24),
-  createData("Bilal", 17, 9.0, 37),
-  createData("Rimsha", 16, 16.0, 24),
-  createData("Arsalan", 15, 3.7, 67),
-  createData("Alina", 19, 16.0, 49),
-  createData("Ali", 19, 6.0, 24),
-  createData("Bilal", 17, 9.0, 37),
-  createData("Rimsha", 16, 16.0, 24),
-  createData("Arsalan", 15, 3.7, 67),
-  createData("Alina", 19, 16.0, 49),
 ];
 
 function TeacherStudentProgress() {
+
+   const [rows,setRows] = useState(data);
+  const [editRowId,setEditRowId] = useState(null);
+  const [editFormData, setEditFormData] = useState({
+    name: "",
+     assessment_1: "",
+     assessment_2: "",
+     assessment_3: "", 
+  }) 
+
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+    const fieldName = event.target.getAttribute("name");     
+    const fieldValue = event.target.value;          
+
+    const newFormData = {...editFormData };
+    newFormData[fieldName] = fieldValue;          // set value against respective field
+
+    setEditFormData(newFormData);         // set updated value
+  }
+
+
+  const handleEditClick = (event, row) => {
+    event.preventDefault();
+    setEditRowId(row.id);
+
+    const formValues = {   // storing values
+      name: row.name,
+      assessment_1: row.assessment_1,
+      assessment_2: row.assessment_2,
+      assessment_3: row.assessment_3, 
+    }
+
+    setEditFormData(formValues);
+  }
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+
+    const editedRow = {   // save values
+      id: editRowId,
+      name: editFormData.name,
+      assessment_1: editFormData.assessment_1,
+      assessment_2: editFormData.assessment_2,
+      assessment_3: editFormData.assessment_3, 
+    }
+
+    const newRow = [...rows];
+
+    //find index of updating row
+    const index= rows.findIndex((row) => row.id === editRowId)
+
+    // pass index to store edited row
+    newRow[index] = editedRow
+
+     // now hide editable row, as we are donw with editing
+     setRows(newRow);
+     setEditRowId(null);
+  }
+
+
   return (
     <div>
      <div style={{position: "fixed" ,}}> <TeacherMenu /> </div>
       <div
         style={{
           float: "right",
-          height: "100vh",
+          height: "100%",
           width: "75%",
           backgroundColor: "lightgray",
         }}
       >
         <div style={{ marginTop: "120px" ,marginLeft: "30px",marginRight: "30px" }}>
+          <form onSubmit={handleEditFormSubmit}>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
@@ -110,25 +160,22 @@ function TeacherStudentProgress() {
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell colSpan={2} align="center">
-                      {row.calories}
-                    </StyledTableCell>
-                    <StyledTableCell colSpan={2} align="center">
-                      {row.fat}
-                    </StyledTableCell>
-                    <StyledTableCell colSpan={2} align="center">
-                      {row.carbs}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
+                  <Fragment>
+                  { editRowId === row.id ? 
+                    <EditableTableRow 
+                    editFormData = {editFormData}   // pass editformdata
+                    handleEditFormChange = {handleEditFormChange}     // pass function to update form values in set state 
+                    />   
+                  :
+                  <ReadOnlyTableRow 
+                  row = {row}
+                  handleEditClick = {handleEditClick}
+                   />
+                  }</Fragment> ) )} 
               </TableBody>
             </Table>
           </TableContainer>
-          <Button type='default' style={{marginTop: 12, marginLeft:400}}>Update</Button>
+          </form>
         </div>
       </div>
     </div>
@@ -136,3 +183,4 @@ function TeacherStudentProgress() {
 }
 
 export default TeacherStudentProgress;
+

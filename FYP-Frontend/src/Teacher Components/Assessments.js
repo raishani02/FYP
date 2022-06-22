@@ -1,7 +1,7 @@
 import React from "react";
 import TeacherMenu from "./TeacherMenu";
-import RecommendedMaterial from "./RecommendedMaterial";
 import AssessmentCard from "./AssessmentCard";
+import UploadAssessment from "./UploadAssessment";
 
 const Assessments = () => {
       
@@ -19,7 +19,7 @@ const Assessments = () => {
           }}
         >
           <div className="row" style={{marginLeft: "200px"}}>
-            <div className="col" style={{marginBottom:"100px", marginTop:"60px"}}>  <RecommendedMaterial /> </div>
+            <div className="col" style={{marginBottom:"100px", marginTop:"60px"}}>  <UploadAssessment /> </div>
             <div className="col" style={{marginTop:"60px" ,marginBottom:"30px"}}> <AssessmentCard /> </div>
           </div>
         </div>
