@@ -12,6 +12,7 @@ function AssessmentCard () {
     const pages = [
       { name: 'Assignment Details', link: '/teacher-view-assignments-detail' },
       { name: 'Quiz Details', link: '/teacher-view-quiz-detail' },
+      { name: 'Deliverable Details', link: '/teacher-view-deliverable-detail' },
     ];
 
     const [courseDropdownTitle,setCourseDropdownTitle]=useState('Select Course');
