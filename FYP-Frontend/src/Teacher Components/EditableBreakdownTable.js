@@ -55,8 +55,7 @@ const EditableBreakdownTable = ({editFormData,handleEditFormChange}) => {
                     <StyledTableCell  align="right">
                       <Button type="Submit"  style={{color:"blue"}}> <strong>Save</strong> </Button>
                     </StyledTableCell>
-                    </StyledTableRow>
-
+                  </StyledTableRow>
 
  )
 }

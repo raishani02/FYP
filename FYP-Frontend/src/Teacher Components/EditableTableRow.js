@@ -36,7 +36,7 @@ const EditableTableRow = ({editFormData,handleEditFormChange}) => {
     return(
         // <StyledTableRow key={row.name}>
         <StyledTableRow>
-                     <StyledTableCell component="th" scope="row">
+                    <StyledTableCell component="th" scope="row">
                       <input type = "text" placeholder="Enter name..." name="name" value={editFormData.name} onChange={handleEditFormChange} />
                     </StyledTableCell>
                     <StyledTableCell colSpan={2} align="center">
@@ -51,11 +51,7 @@ const EditableTableRow = ({editFormData,handleEditFormChange}) => {
                     <StyledTableCell  align="center">
                       <Button type="Submit"  style={{color:"blue"}}> <strong>Save</strong> </Button>
                     </StyledTableCell>
-
                   </StyledTableRow>
- 
-
-                  
     )
 }
 

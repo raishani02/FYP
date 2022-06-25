@@ -75,7 +75,7 @@ function TeacherStudentProgress() {
 
     const formValues = {   // storing values
       name: row.name,
-      assessment_1: row.assessment_1,  
+      assessment_1: row.assessment_1,
       assessment_2: row.assessment_2,
       assessment_3: row.assessment_3, 
     }
@@ -181,11 +181,6 @@ function TeacherStudentProgress() {
     </div>
   );
 }
-
-
-
-
-
 
 export default TeacherStudentProgress;
 
