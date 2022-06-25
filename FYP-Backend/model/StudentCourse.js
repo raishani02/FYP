@@ -9,6 +9,12 @@ const studentCourseSchema = new mongoose.Schema({
     student_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    student_rollNo:{
+        type: String
+    },
+    course_name:{
+        type:String
     }
     
 });

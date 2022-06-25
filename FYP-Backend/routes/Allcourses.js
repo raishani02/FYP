@@ -28,7 +28,7 @@ router.get('/mycourses', verify, async(req,res,next) =>{
     }
     else{
 
-        var courses = await StudentCourse.find({student_id:"628e049f12f60eadbdea779e"}).populate({ path:'cts_id',populate:{path:'course_id teacher_id'}});
+        var courses = await StudentCourse.find({student_id:req.query.user_id}).populate({ path:'cts_id',populate:{path:'course_id teacher_id'}});
          // console.log("hmm"+courses);
         
         res.json(courses);
