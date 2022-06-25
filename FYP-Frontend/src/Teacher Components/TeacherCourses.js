@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TeacherMenu from "./TeacherMenu";
 import {getcourses} from "../Actions/getcourse"
-import Pagination from "../Pagination/pagination";
+import Pagination from "../pagination/pagination";
 
 
 const TeacherCourses = () => {

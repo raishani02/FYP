@@ -63,6 +63,7 @@ function UploadAssessment(){
     const handleSelectType=(e)=>{
         // console.log("now we are "+e);
       setTypeDropdownTitle(e)
+
     } 
 
     const handleSelectLevel=(e)=>{
@@ -87,22 +88,20 @@ function UploadAssessment(){
                 reader.onloadend = () => 
                 {
                   console.log("my file data"+reader.result);
-                  setuploadedfile(reader.result);
+                  // setuploadedfile(reader.result);
+                  setData({course_name:courseDropdownTitle,
+                    section:sectionDropdownTitle,
+                    type:typeDropdownTitle,
+                    content:reader.result,
+                    weightage:10,
+                    difficulty_level:levelDropdownTitle,
+                    due_date:"jan -10 -20",
+                    course_name:courseDropdownTitle
+                  });
                 }
     }
 
     const uploadAssessment =()=>{
-
-      setData({course_name:courseDropdownTitle,
-        section:sectionDropdownTitle,
-        type:typeDropdownTitle,
-        content:uploadedfile,
-        weightage:10,
-        difficulty_level:levelDropdownTitle,
-        due_date:"jan -10 -20",
-        course_name:courseDropdownTitle
-      });
-      
       console.log(data);
 
       Uploadassessments(data,

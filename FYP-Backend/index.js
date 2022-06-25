@@ -23,16 +23,9 @@ mongoose.connect('mongodb+srv://raiarslanriasat:Arslan%40123@cluster0.edbuh.mong
 (e) => console.log(e))
 
 
-// mongoose.connect(url,
-//      { useNewUrlParser:true,
-//         useUnifiedTopology:true, }, (err, client) => {
-//   if (err) return console.log(err)
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
-//   // Storing a reference to the database so you can use it later
-// //   db = client.db(dbName)
-//   console.log(`Connected MongoDB: ${url}`)
-//   console.log(`Database: ${dbName}`)
-// })
 
 // use it before all route definitions
 // app.use(cors({origin: 'http://localhost:3000'}));
@@ -51,12 +44,17 @@ app.use(cookieParser());
 //Middlewares
 app.use(express.json());
 
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
+
 //Import Routes
 const authRoute = require('./routes/auth')
 const Allcourses = require('./routes/Allcourses')
 const Assessment = require('./routes/uploadAssessment')
 //Route middlewares
-app.use('/api/user', authRoute)
+app.use('/api/user', authRoute);
+
 
 //Posts middlewares
 
@@ -64,7 +62,8 @@ app.use('/api/user', authRoute)
 // app.use('/api/createpost', CreatePostRoute)
 
 // //to get all the posts related apis
-app.use('/api/courses', Allcourses)
+app.use('/api/courses', Allcourses);
+
 
 // //to get all the users related apis
 // app.use('/api/users', AllusersRoute)
@@ -77,14 +76,14 @@ app.listen(5000, ()=> console.log('Server is running'))
 // ******************************* uploading file (not working) *****************************************
 
 const fileupload = require("express-fileupload");
-const UploadFile = require('./model/UploadFile');
+// const UploadFile = require('./model/UploadFile');
 
 app.use(cors());
-app.use(fileupload());
-app.use(express.static("files"));
+// app.use(fileupload());
+// app.use(express.static("files"));
 
 
 
-app.use ('/api/teacher-assessments',UploadFile);
+// app.use ('/api/teacher-assessments',UploadFile);
 
 app.use ('/api/courses/assessment',Assessment);
