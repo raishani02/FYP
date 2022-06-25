@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import TeacherMenu from "./TeacherMenu";
 import { Card, Col, Row } from "react-bootstrap";
 import AssignmentCompletionChart from "./AssignmentCompletionChart";

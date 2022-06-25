@@ -70,6 +70,17 @@ app.use('/api/courses', Allcourses)
 
 
 
+
 app.listen(5000, ()=> console.log('Server is running'))
 
-// module.exports = app;
+// ******************************* uploading file (not working) *****************************************
+
+const fileupload = require("express-fileupload");
+const UploadFile = require('./model/UploadFile');
+
+app.use(cors());
+app.use(fileupload());
+app.use(express.static("files"));
+
+app.use ('/api/teacher-assessments',UploadFile);
+

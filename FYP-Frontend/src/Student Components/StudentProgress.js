@@ -36,8 +36,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, assessment_1,assessment_2,assessment_3) {
+  return { name, assessment_1,assessment_2,assessment_3 };
 }
 
 const rows = [
@@ -92,13 +92,13 @@ function StudentProgress() {
                       {row.name}
                     </StyledTableCell>
                     <StyledTableCell colSpan={1} align="center">
-                      {row.calories}
+                      {row.assessment_1}
                     </StyledTableCell>
                     <StyledTableCell colSpan={1} align="center">
-                      {row.fat}
+                      {row.assessment_2}
                     </StyledTableCell>
                     <StyledTableCell colSpan={1} align="center">
-                      {row.carbs}
+                      {row.assessment_3}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

@@ -1,5 +1,10 @@
 import React from "react";
 import StudentMenu from "./StudentMenu";
+import StudentAssignmentCompletionChart from "./StudentAssignmentCompletionChart";
+import StudentCourseProgressChart from "./StudentCourseProgressChart";
+import StudentDueAssignmentsChart from "./StudentDueAssignmentsChart";
+import StudentProjectDeliverableChart from "./StudentProjectDeliverableChart";
+import { Row,Col,Card, Container } from "react-bootstrap";
 
 function StudentHome() {
   return (
@@ -13,63 +18,123 @@ function StudentHome() {
           backgroundColor: "lightgray",
         }}
       >
-        <img
-          src="/images/progress.png"
-          alt="progress"
-          style={{
-            width: "300px",
-            height: "200px",
-            marginTop: "70px",
-            marginLeft: "100px",
-          }}
-        />
 
-<img
-          src="/images/assignments.png"
-          alt="dueassignment"
-          style={{
-            float: "right",
-            width: "300px",
-            height: "200px",
-            marginTop: "70px",
-            marginRight: "100px",
-          }}
-        />
+<Container>
+          {/* ***********************Card-1***************************** */}
+          <Row>
+            
+        
+          <Col>
+            <Card
+              style={{
+                marginLeft: "80px",
+                marginTop: "80px",
+                width: "380px",
+                height: "220px",
+                background: "lightblue",
+                borderWidth: "5px",
+              }}
+            >
+              <Card.Body>
+                <Card.Title style={{ textAlign: "left" }}>
+                  <strong> Course Completion Progress</strong>
+                </Card.Title>
+                <Card.Text
+                  style={{ bottom: "10px", textAlign: "left" }}
+                ></Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                  <StudentCourseProgressChart />
+              </Card.Footer>
+            </Card>
+          {/* </div> */}
+          </Col>
 
-        <img
-          src="/images/progress2.png"
-          alt="assignmentprogress"
-          style={{
-            float: "bottom",
-            width: "300px",
-            height: "200px",
-            marginTop: "80px",
-            marginLeft: "100px",
-          }}
-        />
+          {/* ***********************Card-2***************************** */}
+          <Col>
+          {/* <div class="column p-3"> */}
+            <Card
+              style={{
+                marginLeft: "80px",
+                marginTop: "80px",
+                width: "380px",
+                height: "220px",
+                background: "lightblue",
+                borderWidth: "5px",
+              }}
+            >
+              <Card.Body>
+                <Card.Title style={{ textAlign: "left" }}>
+                  <strong>Due Assignments' Status</strong>
+                </Card.Title>
+                <Card.Text
+                  style={{ bottom: "10px", textAlign: "left" }}
+                ></Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                 <StudentDueAssignmentsChart />
+                 </Card.Footer>
+            </Card>
+           </Col>
+          </Row>
 
-        <img
-          src="/images/db.png"
-          alt="dueassignment"
-          style={{
-            float: "right",
-            width: "150px",
-            height: "200px",
-            marginTop: "80px",
-            marginRight: "100px",
-          }}
-        />
-        <img
-          src="/images/oop.png"
-          alt="dueassignment"
-          style={{
-            float: "right",
-            width: "150px",
-            height: "200px",
-            marginTop: "80px",
-            marginRight: "0px",
-          }}
-        />
+          {/* ***********************Card-3***************************** */}
+          <Row>
+          <Col>
+          
+            <Card
+              style={{
+                marginLeft: "80px",
+                marginTop: "80px",
+                width: "380px",
+                height: "220px",
+                background: "lightblue",
+                borderWidth: "5px",
+              }}
+            >
+              <Card.Body>
+                <Card.Title style={{ textAlign: "left" }}>
+                  <strong>Assignments Completion Progress</strong>
+                </Card.Title>
+                <Card.Text
+                  style={{ bottom: "10px", textAlign: "left" }}
+                ></Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <StudentAssignmentCompletionChart />
+              </Card.Footer>
+            </Card>
+          </Col>
+          {/* ***********************Card-4***************************** */}
+
+        <Col>
+            <Card
+              style={{
+                marginLeft: "80px",
+                marginTop: "80px",
+                width: "380px",
+                height: "220px",
+                background: "lightblue",
+                borderWidth: "5px",
+              }}
+            >
+              <Card.Body>
+                <Card.Title style={{ textAlign: "left" }}>
+                  <strong> Project Deliverable Progress</strong>
+                </Card.Title>
+                <Card.Text
+                  style={{ bottom: "10px", textAlign: "left" }}
+                ></Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                  <StudentProjectDeliverableChart />
+              </Card.Footer>
+            </Card>
+            </Col>
+          </Row>
+          </Container>
+
+       
       </div>
     </div>
   );
