@@ -96,6 +96,7 @@ function App() {
               path="/student-view-deliverable-detail"
               element={<StudentViewDeliverableDetail />}
             />
+            
           </Routes>
         </div>
       </div>

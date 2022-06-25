@@ -54,6 +54,7 @@ app.use(express.json());
 //Import Routes
 const authRoute = require('./routes/auth')
 const Allcourses = require('./routes/Allcourses')
+const Assessment = require('./routes/uploadAssessment')
 //Route middlewares
 app.use('/api/user', authRoute)
 
@@ -82,5 +83,8 @@ app.use(cors());
 app.use(fileupload());
 app.use(express.static("files"));
 
+
+
 app.use ('/api/teacher-assessments',UploadFile);
 
+app.use ('/api/courses/assessment',Assessment);

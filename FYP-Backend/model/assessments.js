@@ -1,16 +1,10 @@
 const mongoose = require('mongoose')
 
 const uploadAssessmentSchema = new mongoose.Schema({
-    course_id:{
+    cts_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'
-    },
-    teacher_id:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    section:{
-        type:String
+        ref: 'teacher_course_section'
+
     }
     ,content:
     {
