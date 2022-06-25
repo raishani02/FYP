@@ -14,10 +14,10 @@ const cookieParser = require('cookie-parser')
 var cors = require('cors');
 
 // const url = 'mongodb://127.0.0.1:27017/FYP'
-const url = 'mongodb+srv://raiarslanriasat:Arslan@123@cluster0.edbuh.mongodb.net/?retryWrites=true&w=majority'
+// const url = 'mongodb+srv://raiarslanriasat:Arslan@123@cluster0.edbuh.mongodb.net/?retryWrites=true&w=majority'
 
-const dbName = 'FYP'
-let db
+// const dbName = 'FYP'
+// let db
 
 mongoose.connect('mongodb+srv://raiarslanriasat:Arslan%40123@cluster0.edbuh.mongodb.net/FYP',
 (e) => console.log(e))
