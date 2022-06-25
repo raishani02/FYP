@@ -9,6 +9,8 @@ const StudentAssessmentCard = () => {
         const pages = [
             { name: 'Assignment Details', link: '/student-view-assignments-detail' },
             { name: 'Quiz Details', link: '/student-view-quiz-detail' },
+            { name: 'Deliverable Details', link: '/student-view-deliverable-detail' },
+
           ];
       
           const [courseDropdownTitle,setCourseDropdownTitle]=useState('Select Course');

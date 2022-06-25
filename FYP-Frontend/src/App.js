@@ -21,6 +21,8 @@ import ViewAssignmentDetail from "./Teacher Components/ViewAssignmentDetail";
 import ViewQuizDetail from "./Teacher Components/ViewQuizDetail.js";
 import StudentViewAssignmentDetail from "./Student Components/StudentViewAssignmentDetail";
 import StudentViewQuizDetail from "./Student Components/StudentViewQuizDetail";
+import ViewDeliverableDetail from "./Teacher Components/ViewDeliverableDetail";
+import StudentViewDeliverableDetail from "./Student Components/StudentViewDeliverableDetail";
 
 function App() {
   return (
@@ -78,6 +80,10 @@ function App() {
               path="/teacher-view-quiz-detail"
               element={<ViewQuizDetail />}
             />
+            <Route
+              path="/teacher-view-deliverable-detail"
+              element={<ViewDeliverableDetail />}
+            />
               <Route
               path="/student-view-assignments-detail"
               element={<StudentViewAssignmentDetail />}
@@ -85,6 +91,10 @@ function App() {
              <Route
               path="/student-view-quiz-detail"
               element={<StudentViewQuizDetail />}
+            />
+            <Route
+              path="/student-view-deliverable-detail"
+              element={<StudentViewDeliverableDetail />}
             />
           </Routes>
         </div>

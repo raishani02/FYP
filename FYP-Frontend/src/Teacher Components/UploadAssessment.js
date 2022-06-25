@@ -50,6 +50,17 @@ const uploader = new Uploader({
 function UploadAssessment(){
     const [courseDropdownTitle,setCourseDropdownTitle]=useState('Select Course');
     const [sectionDropdownTitle,setSectionDropdownTitle]=useState('Select Section');
+    const [levelDropdownTitle,setLevelDropdownTitle]=useState('Select Difficulty Level');
+    const [typeDropdownTitle,setTypeDropdownTitle]=useState('Select Type');
+
+    const handleSelectType=(e)=>{
+        
+      setTypeDropdownTitle(e)
+    } 
+
+    const handleSelectLevel=(e)=>{
+      setLevelDropdownTitle(e)
+    }
     
       const handleSelectSection=(e)=>{
         // console.log(e);
@@ -84,7 +95,12 @@ return (
           <h5 class="card-title" style={{textAlign:"center"}}> <strong>Upload Assessment</strong></h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item"
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+          }}>
       <DropdownButton
         position="Center"
         title={courseDropdownTitle}
@@ -97,10 +113,8 @@ return (
           Advanced Database
         </Dropdown.Item>
       </DropdownButton>
-          </li>
 
-          <li class="list-group-item">
-          <DropdownButton
+      <DropdownButton
         position="Center"
         title={sectionDropdownTitle}
         id="dropdown-menu-for-section-of-assessment-material"
@@ -110,6 +124,35 @@ return (
         <Dropdown.Item eventKey="BCS-8A"> BCS-8A </Dropdown.Item>
         <Dropdown.Item eventKey="BCS-8B"> BCS-8B </Dropdown.Item>
       </DropdownButton>
+          </li>
+
+          <li class="list-group-item" 
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+          }}>
+          <DropdownButton
+        position="Center"
+        title={levelDropdownTitle}
+        id="dropdown-menu-for-level-of-assessment-material"
+        onSelect={handleSelectLevel}
+      >
+        <Dropdown.Item eventKey="Easy">Easy</Dropdown.Item>
+        <Dropdown.Item eventKey="Medium"> Medium </Dropdown.Item>
+        <Dropdown.Item eventKey="Hard"> Hard</Dropdown.Item>
+      </DropdownButton>
+
+      <DropdownButton
+              position="Center"
+              title={typeDropdownTitle}
+              id="dropdown-menu-for-type-of-assessment"
+              onSelect={handleSelectType}
+            >
+              <Dropdown.Item eventKey="Assignment">Assignment</Dropdown.Item>
+              <Dropdown.Item eventKey="Quiz"> Quiz </Dropdown.Item>
+              <Dropdown.Item eventKey="Deliverable"> Project Deliverable </Dropdown.Item>
+            </DropdownButton>
           </li>
         </ul>
         
