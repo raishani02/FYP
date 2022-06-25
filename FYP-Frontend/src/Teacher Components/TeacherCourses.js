@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import TeacherMenu from "./TeacherMenu";
 import {getcourses} from "../Actions/getcourse"
+import Pagination from "../pagination/pagination";
 
 
 const TeacherCourses = () => {
       
   const [courses, setCourses] = React.useState([]);
 
-  const [Loaded, setLoaded] = React.useState(false)
+  const [Loaded, setLoaded] = React.useState(false);
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [coursesPerPage] = React.useState(2);
+
 
   const [ref, setref] = React.useState(true)
   React.useEffect(()=>{
@@ -31,7 +36,7 @@ const TeacherCourses = () => {
   
     console.log("hellllllllll"+course.c_name)
     return (
-        <div className="col ">
+        <div className="col-4 col-md-4 ">
         <div class="card border-primary " style={{
             marginLeft: "10px",
             marginRight: "-32px",
@@ -67,7 +72,14 @@ const TeacherCourses = () => {
     //window.location.reload();
     setref(!ref)
   }
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
 
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  
     return (
       <div>
       <TeacherMenu /> 
@@ -81,10 +93,15 @@ const TeacherCourses = () => {
         <div className="container">
         <div className="row">
 
-          {courses.map((course) => (              
+          {currentCourses.map((course) => (              
               Course(course)
           ))}    
             
+            <Pagination 
+              coursesPerPage={coursesPerPage}
+              totalCourses={courses.length}
+              paginate={paginate}
+            />
         </div>
         </div>
       :
