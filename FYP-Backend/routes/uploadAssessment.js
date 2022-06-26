@@ -23,7 +23,7 @@ router.post('/uploadassessment', verify, async(req,res,next) => {
 
   const tcsObj = await TeacherCourseSection.findOne({ teacher_id: req.body.user_id, course_id: c_id, section: req.body.section}); 
   
-  console.log("cts is content is"+ req.body.content);
+  // console.log("cts is content is"+ req.body.content);
   
        const assessment = new Assessments({
          cts_id:tcsObj._id,
@@ -36,7 +36,7 @@ router.post('/uploadassessment', verify, async(req,res,next) => {
          assessment_name:"quiz-1"
          
        });
-       console.log(assessment);
+      //  console.log(assessment);
        try {
          //saved the new user to database
           await assessment.save();

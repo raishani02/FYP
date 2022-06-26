@@ -25,6 +25,7 @@ const TeacherCourses = () => {
     (success) => {
       console.log("Success data"+success.data[0].c_name);
       setCourses(success.data);
+      localStorage.setItem('Tcourses',success.data);
       // console.log("Course is"+courses);
       setLoaded(true)
     }
