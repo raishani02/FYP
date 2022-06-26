@@ -42,6 +42,12 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from "react-bootstrap/esm/Button";
 import {Uploadassessments} from '../Actions/Assessments';
+import {
+  NotificationContainer,
+  NotificationManager ,
+} from "react-notifications";
+import TeacherMenu from "./TeacherMenu";
+
 
 
 function UploadAssessment(){
@@ -110,13 +116,17 @@ function UploadAssessment(){
         },
         (success)=>{
           console.log("Assessmen is added"+success);
+          NotificationManager.success("Assessment created");
         });
     }
 
 
 return (
   <div>
+
     <div className="container" >
+    <NotificationContainer />
+
       <div
         class="card border-primary "
         style={{
@@ -124,6 +134,7 @@ return (
          height:"450px"
         }}
       >
+
         <img
          src="https://picsum.photos/id/370/4928/3264"
           class="card-img-top"

@@ -52,6 +52,8 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 const authRoute = require('./routes/auth')
 const Allcourses = require('./routes/Allcourses')
 const Assessment = require('./routes/uploadAssessment')
+const ContentMapping = require('./routes/contentMapping')
+
 //Route middlewares
 app.use('/api/user', authRoute);
 
@@ -87,3 +89,7 @@ app.use(cors());
 // app.use ('/api/teacher-assessments',UploadFile);
 
 app.use ('/api/courses/assessment',Assessment);
+app.use ('/api/courses/content',ContentMapping);
+
+
+
