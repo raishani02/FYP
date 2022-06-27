@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const verify = require('./verifyToken');
 const Assessment = require("../model/assessments");
+const teacher_courses_Section = require("../model/teacher_course_section")
 
 router.get('/teacher-view-assignments-detail', verify, async(req,res,next) =>{
 
@@ -47,8 +48,8 @@ router.get('/teacher-view-quiz-detail', verify, async(req,res,next) =>{
     var c_id = course_id._id;
  
     
-
-    if(req.query.type=== "Teacher"){
+    console.log("user type "+req.query.user_type)
+    if(req.query.user_type=== "Teacher"){
         var assessment = await Assessment.find({  teacher_id: req.body.user_id,
             course_id: c_id,
             section: req.body.section,
@@ -110,5 +111,7 @@ router.get('/teacher-view-deliverable-detail', verify, async(req,res,next) =>{
     }
     
 })
+
+
 
 module.exports = router;

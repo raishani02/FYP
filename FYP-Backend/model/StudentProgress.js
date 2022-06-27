@@ -4,7 +4,7 @@ const Course = require("./Course");
 const cts = require("./teacher_course_section");
 const { Int32 } = require('mongodb');
 
-const StudentProgress = new mongoose.Schema({
+const StudentProgressschema = new mongoose.Schema({
     rollNo:{
         type: mongoose.Schema.Types.String,
         ref: 'User'
@@ -24,7 +24,7 @@ const StudentProgress = new mongoose.Schema({
         type: Date
     },
     obtainedmarks:{
-        type: Int32,
+        type: String,
         default:0
     },
     badge:{
@@ -37,4 +37,4 @@ const StudentProgress = new mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('StudentProgress', StudentProgress);
+module.exports = mongoose.model('StudentProgress', StudentProgressschema);

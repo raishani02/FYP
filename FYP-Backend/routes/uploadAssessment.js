@@ -12,11 +12,8 @@ router.post('/uploadassessment', verify, async(req,res,next) => {
   console.log("c_name"+req.body.course_name);
   var course_id = await Course.findOne({c_name:req.body.course_name});
 
-  // console.log("course "+course_id);
-  var c_id = course_id._id;
-  // console.log("c_id is"+c_id + "section"+req.body.section);
-
-  var date = new Date().toDateString();
+   var c_id = course_id._id;
+   var date = new Date().toDateString();
 
 
 //  if(req.body.type=== "Teacher"){
@@ -50,7 +47,33 @@ router.post('/uploadassessment', verify, async(req,res,next) => {
 )
  
 
+router.get('/get-all-assessments', verify, async(req,res,next) =>{
 
+  // console.log("user id in get assess is"+req.query.user_id);
+  // console.log("user type in get assess is"+req.query.course_name+req.query.course_section+req.query.user_type);
+  var course_id = await Course.findOne({c_name:req.query.course_name});
+  var c_id = course_id._id;
+
+  
+
+  if(req.query.user_type=== "Teacher"){
+
+      try{
+        console.log("hmmm" + c_id+"  " + req.query.user_id + "  "+ req.query.course_section);
+
+          const cts = await TeacherCourseSection.findOne({teacher_id:req.query.user_id,course_id:c_id,section:req.query.course_section})
+          console.log(cts._id);
+          var assessment = await Assessments.find({cts_id:cts._id},{content:0});
+  
+          console.log("Assessment is "+assessment);
+          res.send(assessment);
+      }catch(err) {
+          res.send(err);
+      }
+      
+  }
+  
+})
 
 
 module.exports = router;

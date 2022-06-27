@@ -19,7 +19,7 @@ import {getcourses} from "../Actions/getcourse"
 import { GetContent } from "../Actions/ContentMapping";
 import { Button } from "antd";
 import { addContent } from "../Actions/ContentMapping";
-import {EditContent} from "../Actions/ContentMapping" 
+import {EditContent} from "../Actions/ContentMapping" ;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -59,6 +59,8 @@ function TeacherWeeklyBreakdown() {
 
  const handlecourse_name=(e)=>{
   setCourseName(e)
+  // console.log("handle name"+course_name);
+
 }
 
 const [ref, setref] = React.useState(true)
@@ -112,8 +114,7 @@ const [ref, setref] = React.useState(true)
       // console.log("Success data"+success.data[0].c_name);
       setRows(success.data);
       console.log("data returned ");
-      // localStorage.setItem('Tcourses',success.data);
-      // console.log("Course is"+courses);
+      
       setLoaded(true)
     }
     )
@@ -122,7 +123,8 @@ const [ref, setref] = React.useState(true)
   const handlecourse_section=(e)=>{
     // console.log(e);
     //setSectionValue(e)
-    setCourse_Section(e)
+    setCourse_Section(e);
+    // console.log("handle section"+course_section);
   }
  const handleEditFormChange = (event) => {
    event.preventDefault();
@@ -232,10 +234,10 @@ const [ref, setref] = React.useState(true)
 
  
  
- const handleDeleteClick = (event, row) => {
+ const handleDeleteClick = (rowId) => {
   // event.preventDefault();
 
-  console.log("delete row is"+row);
+  console.log("delete row is"+rowId);
 
  }
 
@@ -287,13 +289,7 @@ const [ref, setref] = React.useState(true)
                       {teacher_courses.map((course) => (              
                         <Dropdown.Item eventKey={course.course_id.c_name}>{course.course_id.c_name}</Dropdown.Item>
                       ))}
-                      {/* <Dropdown.Item eventKey="Data WareHouse">Data WareHouse</Dropdown.Item>
-                      <Dropdown.Item eventKey="Advanced Database">
-                        Advanced Database
-                      </Dropdown.Item> */}
                     </DropdownButton>
-
-                     {/* <a href="/teacher-student-progress?course_name=OOP">OOP</a> */}
 
                    </StyledTableCell>
 
@@ -310,11 +306,7 @@ const [ref, setref] = React.useState(true)
                       {teacher_courses.map((course) => (              
                         <Dropdown.Item eventKey={course.section}>{course.section}</Dropdown.Item>
                       ))}
-                      {/* <Dropdown.Item eventKey="CS-1A">CS-1A</Dropdown.Item>
-                      <Dropdown.Item eventKey="BCS-2B">BCS-2B</Dropdown.Item>
-                      <Dropdown.Item eventKey="BCS-5A">
-                      BCS-5A
-                      </Dropdown.Item> */}
+                      
                     </DropdownButton>
                    </StyledTableCell>
 
@@ -322,7 +314,6 @@ const [ref, setref] = React.useState(true)
                     <Button onClick={getcontentdetails}>
                       View
                     </Button>
-                     {/* <a href="/teacher-student-progress?course_name=FP">View</a> */}
                    </StyledTableCell>
                    <StyledTableCell >
                    <Button onClick={handleadder}>Add</Button>
