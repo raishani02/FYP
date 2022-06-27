@@ -9,6 +9,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React from "react";
 import StudentMenu from "./StudentMenu";
+import { Button } from "antd";
+import { useState } from "react";
+import { Fragment } from "react";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+import {getcourses} from "../Actions/getcourse"
+import { GetContent } from "../Actions/ContentMapping";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -49,6 +57,80 @@ const rows = [
 ];
 
 function StudentWeeklyBreakdown() {
+ const [studen_courses,setStudentCourses] = useState([]);
+
+  const [rows,setRows] = useState([]);
+  const [course_name,setCourseName]=useState();
+  const [course_section,setCourse_Section]=useState();
+  const [Loaded, setLoaded] = React.useState(false);
+  const [addrow,setadder] = React.useState(false);
+
+  const [ref, setref] = React.useState(true)
+  React.useEffect(()=>{
+    console.log("in useeffect");
+    getcourses(
+      (error) => {
+      console.log("Error is"+error);
+      setLoaded(true)
+    },
+    (success) => {
+      // console.log("Success data"+success.data[0].course_id.c_name);
+      console.log(success.data);
+      setStudentCourses(success.data);
+      setCourseName(success.data[0].cts_id.course_id.c_name  );
+      setCourse_Section(success.data[0].cts_id.section);
+      console.log("c name"+success.data[0].cts_id.course_id.c_name);
+      // setLoaded(true);
+
+      // localStorage.setItem('Tcourses',success.data);
+      // console.log("Course is"+courses);
+      
+    // if(true){
+      GetContent(
+        success.data[0].cts_id.course_id.c_name,success.data[0].cts_id.section,
+        (error) => {
+        console.log("Error is"+error);
+      },
+      (success) => {
+        // console.log("Success data"+success.data[0].c_name);
+        setRows(success.data);
+        console.log("data returned ");
+        console.log(success.data);
+        // localStorage.setItem('Tcourses',success.data);
+        // console.log("Course is"+courses);
+        setLoaded(true)
+      }
+      )
+    }
+    // } 
+  );
+  },[ref]);
+
+  const getcontentdetails =()=>{
+    console.log("name and section"+course_name + course_section);
+    GetContent(
+      course_name,course_section,
+      (error) => {
+      console.log("Error is"+error);
+    },
+    (success) => {
+      // console.log("Success data"+success.data[0].c_name);
+      setRows(success.data);
+      console.log("data returned ");
+      // localStorage.setItem('Tcourses',success.data);
+      console.log(success.data);
+      setLoaded(true)
+    }
+    )
+  }
+  const handlecourse_name=(e)=>{
+    setCourseName(e)
+  }
+  const handlecourse_section=(e)=>{
+    
+    setCourse_Section(e)
+  }
+
   return (
     <div>
       <StudentMenu/>
@@ -64,12 +146,48 @@ function StudentWeeklyBreakdown() {
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
-                <TableRow>
-                  <StyledTableCell>Courses</StyledTableCell>
-                  <StyledTableCell align="right"><a href="/student-weekly-breakdown?course_name=OOP">OOP</a></StyledTableCell>
-                  <StyledTableCell align="right"><a href="/student-weekly-breakdown?course_name=FP">FP</a></StyledTableCell>
-                  <StyledTableCell align="right"><a href="/student-weekly-breakdown?course_name=Database">Database</a></StyledTableCell>
-                </TableRow>
+              <TableRow>
+                   <StyledTableCell>Courses</StyledTableCell>
+                   <StyledTableCell align="right">
+                   <DropdownButton
+                      position="Center"
+                      title={course_name}
+                      id="dropdown-menu-for-course-of-assessment-material"
+                      onSelect={handlecourse_name}
+                    >
+                      {studen_courses.map((course) => (              
+                        <Dropdown.Item eventKey={course.cts_id.course_id.c_name}>{course.cts_id.course_id.c_name}</Dropdown.Item>
+                      ))}
+                      
+                    </DropdownButton>
+
+                   </StyledTableCell>
+
+                   {/* <StyledTableCell>Section</StyledTableCell> */}
+
+                   {/* <StyledTableCell>
+                   <DropdownButton
+                      position="Center"
+                      title={course_section}
+                      id="dropdown-menu-for-course-of-assessment-material"
+                      onSelect={handlecourse_section}
+                    >
+
+                      {studen_courses.map((course) => (              
+                        <Dropdown.Item eventKey={course.cts_id.section}>{course.cts_id.section}</Dropdown.Item>
+                      ))}
+                      
+                    </DropdownButton>
+                   </StyledTableCell> */}
+
+                   <StyledTableCell >
+                    <Button onClick={getcontentdetails}>
+                      View
+                    </Button>
+                   </StyledTableCell>
+                   
+                   
+                 </TableRow>
                 <TableRow>
                   <StyledTableCell>Week</StyledTableCell>
                   <StyledTableCell align="right">
@@ -85,21 +203,29 @@ function StudentWeeklyBreakdown() {
                   <StyledTableCell align="right"></StyledTableCell>
                 </TableRow>
               </TableHead>
+              {
+                rows ?
+              
               <TableBody>
                 {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
+                  <StyledTableRow key={row.Week}>
                     <StyledTableCell component="th" scope="row">
-                      {row.name}
+                      {row.Week}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.calories}
+                      {row.Topics_To_Be_Covered}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.Topic_Details}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.Reading_From_TextBook}</StyledTableCell>
+                    <StyledTableCell align="right">{row.Project_Deliverable}</StyledTableCell>
+                    {/* <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
                   </StyledTableRow>
                 ))}
               </TableBody>
+              :<div>Loading</div>
+              }
             </Table>
           </TableContainer>
         </div>

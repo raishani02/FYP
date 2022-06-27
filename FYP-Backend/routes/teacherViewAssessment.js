@@ -1,8 +1,12 @@
 const router = require("express").Router();
 const verify = require('./verifyToken');
 const Assessment = require("../model/assessments");
+<<<<<<< HEAD
 const Course = require("../model/Course")
 const TeacherCourseSection = require("../model/teacher_course_section")
+=======
+const teacher_courses_Section = require("../model/teacher_course_section")
+>>>>>>> master
 
 //***************** whenever this api gets called, we'll also call "totalSubmissions.js" API too on frontend
 
@@ -60,6 +64,7 @@ router.get('/viewassessment', verify, async(req,res,next) =>{
 //     var c_id = course_id._id;
  
     
+<<<<<<< HEAD
 
 //     if(req.query.type=== "Teacher"){
 //         var assessment = await Assessment.find({  teacher_id: req.body.user_id,
@@ -84,6 +89,32 @@ router.get('/viewassessment', verify, async(req,res,next) =>{
 //          console.log(assessment);
 //         res.json(assessment);
 //     }
+=======
+    console.log("user type "+req.query.user_type)
+    if(req.query.user_type=== "Teacher"){
+        var assessment = await Assessment.find({  teacher_id: req.body.user_id,
+            course_id: c_id,
+            section: req.body.section,
+            type: req.body.type,
+            assessment_name: req.type.assessment_name
+        }
+        ,{
+            course_id:0,
+            teacher_id:0,
+            section:0,
+            content:0,
+            type:0,
+            difficulty_level:1,
+            posted_on:1,
+            due_date:1,
+            weightage: 1 ,
+            assessment_name:1
+        });
+
+         console.log(assessment);
+        res.json(assessment);
+    }
+>>>>>>> master
     
 // })
 
@@ -123,5 +154,7 @@ router.get('/viewassessment', verify, async(req,res,next) =>{
 //     }
     
 // })
+
+
 
 module.exports = router;

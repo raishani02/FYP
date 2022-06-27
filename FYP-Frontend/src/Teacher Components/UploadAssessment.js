@@ -43,8 +43,19 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from "react-bootstrap/esm/Button";
 import DatePicker from 'react-date-picker';
 import {Uploadassessments} from '../Actions/Assessments';
+<<<<<<< HEAD
 import { borderLeft } from "@mui/system";
 import { blue } from "@material-ui/core/colors";
+=======
+import {
+  NotificationContainer,
+  NotificationManager ,
+} from "react-notifications";
+import TeacherMenu from "./TeacherMenu";
+import { Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+
+>>>>>>> master
 
 
 function UploadAssessment(){
@@ -87,6 +98,7 @@ function UploadAssessment(){
       //setCourseValue(e)
       setCourseDropdownTitle(e)
     }
+<<<<<<< HEAD
     const handleSelectName=(e)=>{
       // console.log(e);
       //setCourseValue(e)
@@ -98,13 +110,35 @@ function UploadAssessment(){
       setWeightageTitle(result);
     }
     
+=======
+    const pdfContentType = 'application/pdf';
+
+  //   const base64toBlob = (data)  => {
+  //     // Cut the prefix `data:application/pdf;base64` from the raw base 64
+  //     const base64WithoutPrefix = data.substr(`data:${pdfContentType};base64,`.length);
+
+  //     const bytes = atob(base64WithoutPrefix);
+  //     let length = bytes.length;
+  //     let out = new Uint8Array(length);
+
+  //     while (length--) {
+  //         out[length] = bytes.charCodeAt(length);
+  //     }
+
+  //     return new Blob([out], { type: pdfContentType });
+  // };
+
+  // const [url,seturlState]=useState();
+
+>>>>>>> master
     const handlefile = (e) =>{
+      // seturlState(null);
       let file = e.target.files[0];
       let reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onloadend = () => 
                 {
-                  console.log("my file data"+reader.result);
+                  console.log(reader.result);
                   // setuploadedfile(reader.result);
                   setData({course_name:courseDropdownTitle,
                     section:sectionDropdownTitle,
@@ -114,8 +148,16 @@ function UploadAssessment(){
                     difficulty_level:levelDropdownTitle,
                     due_date:"jan -10 -20"
                   });
+                  // console.log("data contenrt ");
+               
+                  // seturlState(URL.createObjectURL(base64toBlob(reader.result)));
+    
+                  // console.log("urlllllll"+url);
                 }
+          
     }
+
+
 
     const uploadAssessment =()=>{
       console.log(data);
@@ -126,6 +168,7 @@ function UploadAssessment(){
         },
         (success)=>{
           console.log("Assessmen is added"+success);
+          NotificationManager.success("Assessment created");
         });
     }
 
@@ -195,7 +238,21 @@ function UploadAssessment(){
 
 return (
   <div>
+
     <div className="container" >
+    <NotificationContainer />
+
+    {/* {url ? 
+    <div
+    style={{
+        border: '1px solid rgba(0, 0, 0, 0.3)',
+        height: '750px',
+    }}
+>
+    <Viewer fileUrl={"c3b222b0-f0f5-4a0c-b0c2-e0eb62a2ba55"} />
+</div>
+:<>No data</>} */}
+
       <div
         class="card border-primary "
         style={{
@@ -203,6 +260,7 @@ return (
          height:"650px"
         }}
       >
+
         <img
          src="https://picsum.photos/id/370/4928/3264"
           class="card-img-top"

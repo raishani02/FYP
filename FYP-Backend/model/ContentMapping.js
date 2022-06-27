@@ -1,27 +1,32 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
 
 const contentMappingSchema = new mongoose.Schema({
     cts_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'teacher_course_section'
     },
+<<<<<<< HEAD
     week_no:
+=======
+    Week:
+>>>>>>> master
     {
         type:String
     },
-    topics_to_be_covered:
+    Topics_To_Be_Covered:
     {
         type:String
     },
-    topic_detail:
+    Topic_Details:
     {
         type:String
     },
-    reading:
+    Reading_From_TextBook:
     {
         type:String
     },
-    project_deliverable: 
+    Project_Deliverable: 
     {
         type:String
     }

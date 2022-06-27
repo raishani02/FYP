@@ -52,10 +52,15 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 const authRoute = require('./routes/auth')
 const Allcourses = require('./routes/Allcourses')
 const Assessment = require('./routes/uploadAssessment')
+<<<<<<< HEAD
 const viewAssessment = require('./routes/teacherViewAssessment')
 const viewStudentAssessment = require('./routes/studentViewAssessment')
 const uploadStudentAssessment = require('./routes/studentUploadAssessment')
 
+=======
+const ContentMapping = require('./routes/contentMapping')
+const GetStudents = require("./routes/GetStudent")
+>>>>>>> master
 //Route middlewares
 app.use('/api/user', authRoute);
 
@@ -90,7 +95,17 @@ app.use(cors());
 
 // app.use ('/api/teacher-assessments',UploadFile);
 
+
 app.use ('/api/courses/assessment',Assessment);
+<<<<<<< HEAD
 app.use ('/api/courses/assessments',viewAssessment);
 app.use ('/api/courses/studentassessments',viewStudentAssessment);
 app.use ('/api/courses/uploadstudentassessments',uploadStudentAssessment);
+=======
+
+app.use ('/api/courses/content',ContentMapping);
+
+app.use ('/api/courses/students',GetStudents);
+
+
+>>>>>>> master

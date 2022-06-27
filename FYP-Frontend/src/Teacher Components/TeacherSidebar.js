@@ -11,22 +11,22 @@ import {
 
 const TeacherSidebar = () => {
   return (
-    <div style={{ display: 'flex', height: '80vh', overflow: 'scroll initial',marginTop:"55px" }}>
+    <div style={{ display: 'flex', height: '90vh', overflow: "none",marginTop:"50px" }}>
         
-      <CDBSidebar textColor="#fff" backgroundColor="#333">
+      <CDBSidebar textColor="#fff" backgroundColor="#333" style={{ width: '100%'}}>
 
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           
           <Avatar
                 alt="Ishaq"
                 src="/images/ali.jpg"
+
                 sx={{
                     dispaly: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: 70,
-                    height: 70,
-  
+                    width: 60,
+                    height: 60,
                     mr: 4,
                     ml: 8,
                   }}

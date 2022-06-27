@@ -7,7 +7,10 @@ const Assessments = () => {
       
     return (
       <div>
-        <TeacherMenu />
+        <div style={{ position: "fixed" }}>
+      
+       <TeacherMenu />
+     </div>
 
         <div
           className="container"
@@ -15,13 +18,19 @@ const Assessments = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-around",
-            marginTop: "50px",
+            marginTop: "",
           }}
         >
           <div className="row" style={{marginLeft: "200px"}}>
+<<<<<<< HEAD
             <div className="col" style={{marginBottom:"100px", marginTop:"60px"}}>  <UploadAssessment /> </div>
             <div className="col" style={{marginTop:"200px" ,marginBottom:"30px"}}> <AssessmentCard /> </div>
            </div>
+=======
+            <div className="col" style={{marginBottom:"100px", marginTop:"110px"}}>  <UploadAssessment /> </div>
+            <div className="col" style={{marginTop:"110px" ,marginBottom:"30px"}}> <AssessmentCard /> </div>
+          </div>
+>>>>>>> master
         </div>
       </div>
     );
