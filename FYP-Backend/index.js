@@ -53,7 +53,7 @@ const authRoute = require('./routes/auth')
 const Allcourses = require('./routes/Allcourses')
 const Assessment = require('./routes/uploadAssessment')
 const ContentMapping = require('./routes/contentMapping')
-
+const GetStudents = require("./routes/GetStudent")
 //Route middlewares
 app.use('/api/user', authRoute);
 
@@ -88,8 +88,11 @@ app.use(cors());
 
 // app.use ('/api/teacher-assessments',UploadFile);
 
+
 app.use ('/api/courses/assessment',Assessment);
+
 app.use ('/api/courses/content',ContentMapping);
 
+app.use ('/api/courses/students',GetStudents);
 
 

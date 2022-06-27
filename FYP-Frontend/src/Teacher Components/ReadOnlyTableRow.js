@@ -35,22 +35,26 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const ReadOnlyTableRow = ({row, handleEditClick}) => {
     return(
-        <StyledTableRow key={row.name}>
+        <StyledTableRow key={row.student_rollNo}>
                     <StyledTableCell component="th" scope="row">
-                      {row.name}
+                      {row.student_rollNo}
                     </StyledTableCell>
-                    <StyledTableCell colSpan={2} align="center">
+                    {/*<StyledTableCell colSpan={2} align="center">
                       {row.assessment_1}
                     </StyledTableCell>
-                    <StyledTableCell colSpan={2} align="center">
+                     <StyledTableCell colSpan={2} align="center">
                       {row.assessment_2}
                     </StyledTableCell>
                     <StyledTableCell colSpan={2} align="center">
                       {row.assessment_3}
+                    </StyledTableCell> */}
+                    <StyledTableCell component="th" scope="row" >
+                      <input type = "text" placeholder="Enter marks..." name="name" value="10"  />
                     </StyledTableCell>
-                    <StyledTableCell  align="center">
+                    
+                    {/* <StyledTableCell  align="center">
                       <Button onClick={(event) => handleEditClick (event,row)} style={{color:"blue"}}> <strong>Edit</strong> </Button>
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                   </StyledTableRow>
 
     )

@@ -2,7 +2,8 @@ const router = require("express").Router();
 const verify = require('./verifyToken');
 const Course = require("../model/Course")
 const contentMapping = require("../model/ContentMapping");
-const TeacherCourseSection = require("../model/teacher_course_section")
+const TeacherCourseSection = require("../model/teacher_course_section");
+const setStudentCourses = require("../model/StudentCourse")
 
 router.post('/add-weekly-breakdown', verify, async(req,res,next) => {
   console.log("user id in break down is "+req.body.user_id);
@@ -40,42 +41,56 @@ router.get('/get-weekly-breakdown', verify, async(req,res,next) => {
 
   // console.log("user type in course is "+req.query.type);
   // finding course id
-  var course_id = await Course.findOne({c_name:req.query.course_name});
-  if(!course_id){
-    console.log("No course found");
+  if(req.query.user_type=="Teacher")
+  {
+    var course_id = await Course.findOne({c_name:req.query.course_name});
+    if(!course_id){
+      console.log("No course found");
+      }
+    var c_id = course_id._id;
+  
+    const tcsObj = await TeacherCourseSection.findOne({ teacher_id: req.query.user_id, course_id: c_id, section: req.query.section}); 
+  
+    try{
+  
+      const content = await contentMapping.find({cts_id:tcsObj._id});
+      res.send(content);
+    }catch{
+      console.log("error in get content");
+      res.send("error in get content");
     }
-  var c_id = course_id._id;
-
-  const tcsObj = await TeacherCourseSection.findOne({ teacher_id: req.query.user_id, course_id: c_id, section: req.query.section}); 
-
-  try{
-
-    const content = await contentMapping.find({cts_id:tcsObj._id});
-    res.send(content);
-  }catch{
-    console.log("error in get content");
-    res.send("error in get content");
   }
+  else{
+    var student_course = await setStudentCourses.findOne({course_name:req.query.course_name});
+    if(!student_course){
+      console.log("No course found");
+      }
+    var cts_id = student_course.cts_id;
+    console.log("course name and id"+student_course.course_name + cts_id)
+    try{
+  
+      const content = await contentMapping.find({cts_id:cts_id});
+      res.send(content);
+    }catch{
+      console.log("error in get content");
+      res.send("error in get content");
+    }
+  }
+  
 
 })
 
 // *****************************delete API me route link adjust krna hai..............
 
-router.delete('/teacher-weekly-breakdown',verify ,async(req,res,next) =>{
-    try
-    {
-        var course_id = await Course.findOne({c_name:req.body.course_name});
-        var c_id = course_id._id;
-
-        contentMapping.deleteOne({_id : req.body.id, teacher_id: req.body.user_id, course_id: c_id, section: req.body.section}).then(function(){
-        }).catch(function(error){
-        });
-        res.status(200).send("1 row of 'content mapping' deleted")
-    }
-    catch(err){
-        res.status(400).send("row of 'content mapping' cant be deleted")
-    }
+router.delete('/delete-weekly-breakdown', verify, async(req, res, next) => {
+  try {
+    contentMapping.deleteOne({ _id: req.body._id }).then(function() {}).catch(function(error) {});
+      res.status(200).send("Post deleted")
+  } catch (err) {
+      res.status(400).send("Post cant be deleted")
+  }
 })
+
 
 // **********************patch API me route link adjust krna hai..............
 
@@ -92,14 +107,6 @@ router.patch('/update-weekly-breakdown', verify, async(req, res, next) => {
   });
 })
  
-router.delete('/delete-weekly-breakdown', verify, async(req, res, next) => {
-  try {
-    contentMapping.deleteOne({ _id: req.body._id }).then(function() {}).catch(function(error) {});
-      res.status(200).send("Post deleted")
-  } catch (err) {
-      res.status(400).send("Post cant be deleted")
-  }
-})
 
 
 
