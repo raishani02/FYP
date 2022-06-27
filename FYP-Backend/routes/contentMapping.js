@@ -12,6 +12,31 @@ router.post('/add-weekly-breakdown', verify, async(req,res,next) => {
   var course_id = await Course.findOne({c_name:req.body.course_name});
   var c_id = course_id._id;
 
+<<<<<<< HEAD
+  //finding cts_id
+  const tcsObj = await TeacherCourseSection.findOne({ teacher_id: req.body.user_id, course_id: c_id, section: req.body.section}); 
+
+
+ if(req.post.type=== "Teacher"){
+       const mapping = new contentMapping({
+        cts_id: tcsObj._id,
+         week_no: req.body.week_no,
+         topics_to_be_covered: req.body.topics_to_be_covered,
+         topic_detail: req.body.topic_detail,
+         reading: req.body.reading,
+         project_deliverable: req.body.project_deliverable
+       });
+       console.log(mapping);
+       try {
+         //saved the new user to database
+         const savedContentMapping = await mapping.save();
+         res.status(200).json(savedContentMapping);
+         console.log("1 document of 'content mapping' inserted");
+       } catch (err) {
+         res.status(400).send(err);
+       }
+     }
+=======
   const tcsObj = await TeacherCourseSection.findOne({ teacher_id: req.body.user_id, course_id: c_id, section: req.body.course_section}); 
 
   console.log("id is"+tcsObj._id);
@@ -33,6 +58,7 @@ router.post('/add-weekly-breakdown', verify, async(req,res,next) => {
       res.status(400).send(err);
     }
      
+>>>>>>> master
 })
 router.get('/get-weekly-breakdown', verify, async(req,res,next) => {
   // console.log("user id in content mapping is "+req.query.user_id);

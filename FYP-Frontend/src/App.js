@@ -23,6 +23,9 @@ import StudentViewAssignmentDetail from "./Student Components/StudentViewAssignm
 import StudentViewQuizDetail from "./Student Components/StudentViewQuizDetail";
 import ViewDeliverableDetail from "./Teacher Components/ViewDeliverableDetail";
 import StudentViewDeliverableDetail from "./Student Components/StudentViewDeliverableDetail";
+import StudentUploadAssignmentDetails from "./Student Components/StudentUploadAssignmentDetails";
+import StudentUploadQuizDetails from "./Student Components/StudentUploadQuizDetails";
+import StudentUploadDeliverableDetails from "./Student Components/StudentUploadDeliverableDetails";
 
 function App() {
   return (
@@ -95,6 +98,19 @@ function App() {
             <Route
               path="/student-view-deliverable-detail"
               element={<StudentViewDeliverableDetail />}
+            />
+
+          <Route
+              path="/student-upload-assignment-details"
+              element={<StudentUploadAssignmentDetails />}
+            />
+            <Route
+              path="/student-upload-quiz-details"
+              element={<StudentUploadQuizDetails />}
+            />
+            <Route
+              path="/student-upload-deliverable-details"
+              element={<StudentUploadDeliverableDetails />}
             />
             
           </Routes>

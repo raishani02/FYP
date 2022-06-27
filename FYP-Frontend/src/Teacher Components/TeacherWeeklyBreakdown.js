@@ -12,6 +12,7 @@ import { useState } from "react";
 import { Fragment } from "react";
 import EditableBreakdownTable from "./EditableBreakdownTable";
 import ReadOnlyBreakdownTable from "./ReadOnlyBreakdownTable";
+import { nanoid } from "nanoid";
 
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -103,6 +104,10 @@ const [ref, setref] = React.useState(true)
   );
   },[ref]);
 
+<<<<<<< HEAD
+ 
+
+=======
   const getcontentdetails =()=>{
     console.log("name and section"+course_name + course_section);
     GetContent(
@@ -126,6 +131,7 @@ const [ref, setref] = React.useState(true)
     setCourse_Section(e);
     // console.log("handle section"+course_section);
   }
+>>>>>>> master
  const handleEditFormChange = (event) => {
    event.preventDefault();
    const fieldName = event.target.getAttribute("name");     
@@ -235,6 +241,10 @@ const [ref, setref] = React.useState(true)
  
  
  const handleDeleteClick = (rowId) => {
+<<<<<<< HEAD
+  console.log( "row id: " + rowId)
+      const newRows = [...rows];
+=======
   // event.preventDefault();
 
   console.log("delete row is"+rowId);
@@ -246,6 +256,7 @@ const [ref, setref] = React.useState(true)
 //   console.log("Deleting id is"+row);
 //       const newRows = [...rows];
     
+>>>>>>> master
   
 //       // const index = rows.findIndex((row) => row._id === rowId);
   
@@ -273,6 +284,7 @@ const [ref, setref] = React.useState(true)
        <div
          style={{ marginTop: "120px", marginLeft: "30px", marginRight: "30px" }}
        >
+
          <form onSubmit={handleEditFormSubmit}>
            <TableContainer component={Paper}>
              <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -386,4 +398,7 @@ const [ref, setref] = React.useState(true)
    </div>
  );
 }
+
+
+
 export default TeacherWeeklyBreakdown;

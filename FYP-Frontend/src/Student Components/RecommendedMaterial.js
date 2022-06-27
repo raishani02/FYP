@@ -24,7 +24,7 @@ const RecommendedMaterial = () => {
       <div>
       <StudentMenu />  
       <div>
-        <Button variant= "outlined" color= "primary"  style={{marginTop: 120, marginLeft:350, height:100}} onClick={handleClickOpen}>
+        <Button variant= "outlined" color= "primary"  style={{marginTop: 120, marginLeft:700, height:100}} onClick={handleClickOpen}>
           <b>Quiz-1 Recommendations and Feedback </b>
         </Button>
         <Dialog open={open} onClose={handleClose}>
@@ -72,7 +72,7 @@ const RecommendedMaterial = () => {
         </Dialog>
       </div>
       <div>
-        <Button variant= "outlined" color= "primary"  style={{marginTop: 50, marginLeft:350,height:100}} onClick={handleClickOpen}>
+        <Button variant= "outlined" color= "primary"  style={{marginTop: 50, marginLeft:700,height:100}} onClick={handleClickOpen}>
           <b>Quiz-2 Recommendations and Feedback  </b>
         </Button>
         <Dialog open={open} onClose={handleClose}>
@@ -121,7 +121,7 @@ const RecommendedMaterial = () => {
         </Dialog>
       </div>
       <div>
-        <Button variant= "outlined" color= "primary"  style={{marginTop: 50, marginLeft:320,height:100}} onClick={handleClickOpen}>
+        <Button variant= "outlined" color= "primary"  style={{marginTop: 50, marginLeft:700,height:100}} onClick={handleClickOpen}>
           <b>Assignment-1 Recommendations and Feedback </b>
         </Button>
         <Dialog open={open} onClose={handleClose}>

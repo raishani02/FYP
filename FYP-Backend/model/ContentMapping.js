@@ -6,7 +6,11 @@ const contentMappingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'teacher_course_section'
     },
+<<<<<<< HEAD
+    week_no:
+=======
     Week:
+>>>>>>> master
     {
         type:String
     },

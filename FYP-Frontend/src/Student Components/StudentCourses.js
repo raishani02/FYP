@@ -40,11 +40,14 @@ const StudentCourses = () => {
         
         return(
             <div className="col ">
-            <div class="card border-primary " style={{
-                marginLeft: "10px",
-                marginRight: "-32px",
+            <div class="card border-primary " 
+                style={{
+                  marginLeft: "300px",
+                  marginRight: "-200px",
+                  width:"350px",
+                }}
                 
-             }} >
+              >
             <img src="https://picsum.photos/id/0/5616/3744" class="card-img-top" alt="..." style={{height: 200}}/>
             <div class="card-body" >
                 <h5 class="card-title">{course.cts_id.course_id.c_name}</h5>

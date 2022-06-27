@@ -22,9 +22,15 @@ const Assessments = () => {
           }}
         >
           <div className="row" style={{marginLeft: "200px"}}>
+<<<<<<< HEAD
+            <div className="col" style={{marginBottom:"100px", marginTop:"60px"}}>  <UploadAssessment /> </div>
+            <div className="col" style={{marginTop:"200px" ,marginBottom:"30px"}}> <AssessmentCard /> </div>
+           </div>
+=======
             <div className="col" style={{marginBottom:"100px", marginTop:"110px"}}>  <UploadAssessment /> </div>
             <div className="col" style={{marginTop:"110px" ,marginBottom:"30px"}}> <AssessmentCard /> </div>
           </div>
+>>>>>>> master
         </div>
       </div>
     );

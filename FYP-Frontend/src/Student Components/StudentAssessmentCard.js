@@ -2,16 +2,21 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MenuItem } from '@mui/material';
+import { Button } from 'react-bootstrap';
+
+// import { MenuItem } from '@mui/material';
+
+
+let course = "Select Course";
 
 const StudentAssessmentCard = () => {
  
-        const pages = [
-            { name: 'Assignment Details', link: '/student-view-assignments-detail' },
-            { name: 'Quiz Details', link: '/student-view-quiz-detail' },
-            { name: 'Deliverable Details', link: '/student-view-deliverable-detail' },
+        // const pages = [
+        //     { name: 'Assignment Details', link: '/student-view-assignments-detail' },
+        //     { name: 'Quiz Details', link: '/student-view-quiz-detail' },
+        //     { name: 'Deliverable Details', link: '/student-view-deliverable-detail' },
 
-          ];
+        //   ];
       
           const [courseDropdownTitle,setCourseDropdownTitle]=useState('Select Course');
           const [typeDropdownTitle,setTypeDropdownTitle]=useState('Select Type');
@@ -27,6 +32,22 @@ const StudentAssessmentCard = () => {
               setTypeDropdownTitle(e)
             } 
       
+            const [data,setData] = useState({
+              course_name:"",
+              type:"",
+            });
+
+            const handlefile = (e) =>{     
+              setData({
+                        course_name:courseDropdownTitle,
+                         type:typeDropdownTitle
+                          });
+            console.log("dataaaaaaaaaaaa in handlefile: ")
+            for (let [key, value] of Object.entries(data)) {
+              console.log(`${key}: ${value}`);
+            }
+            }
+
       
       return (
         <div>
@@ -35,7 +56,7 @@ const StudentAssessmentCard = () => {
               class="card border-primary "
               style={{
                 width: "350px",
-                height: "350px",
+                height: "450px",
               }}
             >
               <img
@@ -60,9 +81,9 @@ const StudentAssessmentCard = () => {
                     position="Center"
                     title={courseDropdownTitle}
                     id="dropdown-menu-for-course-of-assessment"
-                    onSelect={handleSelect}
+                    onSelect={event => {handleSelect(event);  handlefile()}}
                   >
-                    <Dropdown.Item eventKey="Database">Database</Dropdown.Item>
+                    <Dropdown.Item eventKey="Programming Fundamental">Programming Fundamental</Dropdown.Item>
                     <Dropdown.Item eventKey="Data WareHouse">
                       Data WareHouse
                     </Dropdown.Item>
@@ -71,7 +92,7 @@ const StudentAssessmentCard = () => {
                     </Dropdown.Item>
                   </DropdownButton>
       
-                  <DropdownButton
+                  {/* <DropdownButton
                     position="Center"
                     title={typeDropdownTitle}
                     id="dropdown-menu-for-assessment-type"
@@ -85,10 +106,60 @@ const StudentAssessmentCard = () => {
                           </MenuItem>
                         </Link>
                       ))}
-                  </DropdownButton>
-                </li>
-      
+                  </DropdownButton> */}
+             </li>
               </ul>
+              <div class="card-body" style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}>
+
+                <>
+               { courseDropdownTitle!= course ? 
+               <DropdownButton
+               position="Center"
+               title={typeDropdownTitle}
+               id="dropdown-menu-for-assessment-type"
+                onSelect={event => {handleSelectType(event);  handlefile()}}
+             >
+               {/* onSelect={handleSelectType} onChange = {handlefile} */}
+ 
+               <Dropdown.Item eventKey="Assignment">Assignment</Dropdown.Item>
+               <Dropdown.Item eventKey="Quiz"> Quiz </Dropdown.Item>
+               <Dropdown.Item eventKey="Deliverable"> Project Deliverable </Dropdown.Item>
+ 
+             </DropdownButton> 
+             : " "
+                }
+              </>   
+
+            <> 
+            { typeDropdownTitle === "Assignment" &&  courseDropdownTitle!= course ? 
+            <Link to='/student-view-assignments-detail'  state={{ from: data }}>
+            <Button onClick={handlefile}>
+                   View
+            </Button>
+                   {/* {console.log (typeDropdownTitle + "dataaaaaa is me: " )} */}
+            </Link> 
+            : typeDropdownTitle === "Quiz" && courseDropdownTitle!= course ? 
+            <Link to='/student-view-quiz-detail'  state={{ from: data }}>
+            <Button onClick={handlefile}>
+                   View
+            </Button>
+            </Link> 
+            : typeDropdownTitle === "Deliverable" &&  courseDropdownTitle!= course ? 
+            <Link to='/student-view-deliverable-detail'  state={{ from: data }}>
+            <Button onClick={handlefile}>
+                   View
+            </Button>
+            </Link> 
+            : " "
+}
+            </>
+
+                </div>
+      
             </div>
           </div>
         </div>
