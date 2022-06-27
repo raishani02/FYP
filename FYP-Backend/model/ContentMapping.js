@@ -1,18 +1,10 @@
 const mongoose = require('mongoose')
 
 const contentMappingSchema = new mongoose.Schema({
-    course_id:{
+    cts_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'
+        ref: 'teacher_course_section'
     },
-    teacher_id:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    section:{
-        type:String
-    }
-    ,
     week_no:
     {
         type:String

@@ -12,6 +12,7 @@ import { useState } from "react";
 import { Fragment } from "react";
 import EditableBreakdownTable from "./EditableBreakdownTable";
 import ReadOnlyBreakdownTable from "./ReadOnlyBreakdownTable";
+import { nanoid } from "nanoid";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -49,6 +50,8 @@ function TeacherWeeklyBreakdown() {
   Reading_From_TextBook: "", 
   Project_Deliverable: "",
  }) 
+
+ 
 
  const handleEditFormChange = (event) => {
    event.preventDefault();
@@ -103,6 +106,7 @@ function TeacherWeeklyBreakdown() {
  }
 
  const handleDeleteClick = (rowId) => {
+  console.log( "row id: " + rowId)
       const newRows = [...rows];
   
       const index = rows.findIndex((row) => row.id === rowId);
@@ -129,6 +133,7 @@ function TeacherWeeklyBreakdown() {
        <div
          style={{ marginTop: "120px", marginLeft: "30px", marginRight: "30px" }}
        >
+
          <form onSubmit={handleEditFormSubmit}>
            <TableContainer component={Paper}>
              <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -188,4 +193,7 @@ function TeacherWeeklyBreakdown() {
    </div>
  );
 }
+
+
+
 export default TeacherWeeklyBreakdown;

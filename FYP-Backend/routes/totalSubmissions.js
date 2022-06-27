@@ -12,10 +12,10 @@ router.get('/teacher-view-assignments-detail', verify, async(req,res,next) =>{
 
  
    // finding section  
-  var cts = await StudentCourse.find({ teacher_id: req.body.user_id, course_name: req.body.course_name},{_id:0, course_id:0, teacher_id:0, section:0,room:0,enrolled_students:0,cts_id:1}); 
+  var cts = await StudentCourse.find({ teacher_id: req.query.user_id, course_name: req.query.course_name},{_id:0, course_id:0, teacher_id:0, section:0,room:0,enrolled_students:0,cts_id:1}); 
 
     if(req.query.type=== "Teacher"){
-        var assessment = await Assessment.find({  teacher_id: req.body.user_id,
+        var assessment = await Assessment.find({ 
             cts_id: cts,
             type: req.body.type,
             assessment_name: req.body.assessment_name

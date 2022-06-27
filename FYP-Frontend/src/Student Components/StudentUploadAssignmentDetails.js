@@ -1,16 +1,38 @@
 import React from "react";
 import StudentMenu from "./StudentMenu";
+import { Uploader } from "uploader";
+import { UploadButton } from "react-uploader";
+import Grid from "@material-ui/core/Grid";
 import { Row,Col,Button } from "react-bootstrap";
 import { useLocation } from 'react-router-dom';
 import {useState} from 'react';
-import { Viewstudentassessments } from "../Actions/viewStudentAssessments";
+import { Uploadstudentassessments } from "../Actions/uploadStudentAssessment";
 
 
-const StudentViewQuizDetail = () => {
+const uploader = new Uploader({
+  // Get production API keys from Upload.io
+  apiKey: "free"
+});
 
-    // const data = [
-    //     { Quiz_No: "1", weightage: "2%", Difficulty_Level: "Medium", Posted_On:"2-April-2022", Deadline:	"3-April-2022" },
+const StudentUploadAssignmentDetails = () => {
+
+    // const dataa = [
+    //     { Assignment_Name: "Assignment 1", Assignment: " ", Upload:" "
+    //         },
     //   ]
+
+
+/*const decode = (basePdf) => {
+        let byteCharacters = atob(basePdf);
+        let byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        let byteArray = new Uint8Array(byteNumbers);
+        let file = new Blob([byteArray], { type: "application/pdf;base64" });
+        let fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      };*/
 
       const location = useLocation();
       const  {from}  = location.state;
@@ -56,7 +78,7 @@ const StudentViewQuizDetail = () => {
       setData({
                     // assessment_name: assignmentNumber,
                     course_name: value1,
-                    type: "Quiz",
+                    type: "Assignment",
                   
                   });
                   
@@ -74,7 +96,7 @@ const StudentViewQuizDetail = () => {
       //     console.log(`${key}: ${value}`);
       //   } 
 
-      Viewstudentassessments(data,
+      Uploadstudentassessments(data,
         (errorr)=>{
           console.log("error"+errorr);
         },
@@ -104,16 +126,65 @@ const StudentViewQuizDetail = () => {
 
     }
 
+    const handlerfile = (e) =>{
+        let file = e.target.files[0];
+        let reader = new FileReader();
+                  reader.readAsDataURL(file);
+                  reader.onloadend = () => 
+                  {
+                    console.log("my file data"+reader.result);
+                    // setuploadedfile(reader.result);
+       //////////////*************************** ye uncomment krna ntegration me */
+                    // setData({course_name:courseDropdownTitle,
+                    //   section:sectionDropdownTitle,
+                    //   type:typeDropdownTitle,
+                    //   content:reader.result,
+                    //   weightage:10,
+                    //   difficulty_level:levelDropdownTitle,
+                    //   due_date:"jan -10 -20",
+                    //   course_name:courseDropdownTitle
+                    // });
+     //////////////*************************** ye uncomment krna ntegration me */
+
+                  }
+  
+                  // console.log("inside func ..... ")
+                  // for (let [key, value] of Object.entries(data)) {
+                  //   console.log(`${key}: ${value}`);
+                  // }
+      }
+
+      const uploadAssessment =()=>{
+               //////////////*************************** ye uncomment krna ntegration me */
+
+        //console.log("data is: " + data);
+
+        // Uploadassessments(data,
+        //   (errorr)=>{
+        //     console.log("error"+errorr);
+        //   },
+        //   (success)=>{
+        //     console.log("Assessmen is added"+success);
+        //   });
+       //////////////*************************** ye uncomment krna ntegration me */
+
+
+
+          // console.log("inside func ..... ")
+          // for (let [key, value] of Object.entries(data)) {
+          //           console.log(`${key}: ${value}`);
+          //         }
+      }
 
     return (
       <div>
         
         <StudentMenu />       
 
-        <div className="container">
+        <div className="container" >
             <Row>
                 <Col>
-                <h1 style={{ marginTop: "100px", textAlign:"center"}} >Quiz Details</h1>
+                <h1 style={{ marginTop: "100px", textAlign:"center"}} >Assignment Details</h1>
                 <div style={{height:" 200px",position: "relative", marginLeft:"500px", width:"200px"}}>
                   <Button >
                 <a  onClick={event => { handlefile(event.target.value); viewStudentAssessment()}} style={{color:"white" }}> View Details</a></Button>
@@ -126,7 +197,6 @@ const StudentViewQuizDetail = () => {
               marginLeft: "380px",
             }}
           >
-            
             <tr>
               <th
                 style={{
@@ -135,7 +205,7 @@ const StudentViewQuizDetail = () => {
                   textAlign: "center",
                 }}
               >
-                <strong>Quiz Name</strong>
+                <strong>Assignment Name</strong>
               </th>
               <th
                 style={{
@@ -144,26 +214,7 @@ const StudentViewQuizDetail = () => {
                   textAlign: "center",
                 }}
               >
-                <strong>Weightage</strong>
-              </th>
-              <th
-                style={{
-                  borderBottom: " 1px solid skyblue",
-                  borderRight: "1px solid skyblue",
-                  textAlign: "center",
-                }}
-              >
-                <strong>Difficulty Level</strong>
-              </th>
-              
-              <th
-                style={{
-                  borderBottom: " 1px solid skyblue",
-                  borderRight: "1px solid skyblue",
-                  textAlign: "center",
-                }}
-              >
-                <strong>Posted On</strong>
+                <strong>Assignment</strong>
               </th>
               <th
                 style={{
@@ -173,6 +224,16 @@ const StudentViewQuizDetail = () => {
                 }}
               >
                 <strong>Deadline</strong>
+              </th>
+              <th
+                style={{
+                  borderBottom: " 1px solid skyblue",
+                  borderRight: "1px solid skyblue",
+                  textAlign: "center",
+                }}
+              >
+                <strong>Upload</strong>
+               
               </th>
             </tr>
             {isLoaded ? <>
@@ -193,24 +254,7 @@ const StudentViewQuizDetail = () => {
                       borderRight: "1px solid skyblue",
                     }}
                   >
-                    {val.weightage}
-                  </td>
-                  <td
-                    style={{
-                      textAlign: "center",
-                      borderRight: "1px solid skyblue",
-                    }}
-                  >
-                    {val.difficulty_level}
-                  </td>
-                 
-                  <td
-                    style={{
-                      textAlign: "center",
-                      borderRight: "1px solid skyblue",
-                    }}
-                  >
-                    {val.posted_on}
+                    {/*onClick={decode(val.Assignment)} */}
                   </td>
                   <td
                     style={{
@@ -220,19 +264,44 @@ const StudentViewQuizDetail = () => {
                   >
                     {val.due_date}
                   </td>
+                  <td
+                    style={{
+                      textAlign: "center",
+                      borderRight: "1px solid skyblue",
+                    }}
+                  >
+                    <Button
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-around",
+                        width: "230px",
+                        marginLeft: "30px"
+                      }}
+                    >
+                      <input
+                        type="file"
+                        accept=" .pdf, .txt"
+                        name="myfile"
+                        onChange={handlerfile}
+                      ></input>
+                    </Button>
+                    <Button onClick={uploadAssessment} style = {{marginTop:"30px"}}>Upload </Button>
+
+                    {val.Upload}
+                  </td>
                 </tr>
               );
             })}
-            </> : <div> Loading...</div>
+             </> : <div> Loading...</div>
           }
           </table>
-
                 </Col>
             </Row>
-          
+         
         </div>
       </div>
     );
 }; 
     
-export default StudentViewQuizDetail;
+export default StudentUploadAssignmentDetails

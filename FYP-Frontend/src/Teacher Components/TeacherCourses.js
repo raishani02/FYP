@@ -38,8 +38,8 @@ const TeacherCourses = () => {
     return (
         <div className="col-4 col-md-4 ">
         <div class="card border-primary " style={{
-            marginLeft: "10px",
-            marginRight: "-32px",
+            marginLeft: "300px",
+            marginRight: "-300px",
          }} >
             {/* {console.log("course name in course is"+course.c_name)} */}
 

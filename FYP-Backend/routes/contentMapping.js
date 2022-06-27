@@ -11,12 +11,13 @@ router.post('/teacher-weekly-breakdown', verify, async(req,res,next) => {
   var course_id = await Course.findOne({c_name:req.body.course_name});
   var c_id = course_id._id;
 
+  //finding cts_id
+  const tcsObj = await TeacherCourseSection.findOne({ teacher_id: req.body.user_id, course_id: c_id, section: req.body.section}); 
 
- if(req.query.type=== "Teacher"){
+
+ if(req.post.type=== "Teacher"){
        const mapping = new contentMapping({
-         course_id: c_id,
-         teacher_id: req.body.user_id,
-         section: req.body.section,
+        cts_id: tcsObj._id,
          week_no: req.body.week_no,
          topics_to_be_covered: req.body.topics_to_be_covered,
          topic_detail: req.body.topic_detail,
